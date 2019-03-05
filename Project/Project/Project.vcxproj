@@ -69,12 +69,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Faculta\An 3\Sem2\SCS\Proiect\Project\deps\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Faculta\An 3\Sem2\SCS\Proiect\Project\deps\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Faculta\An 3\Sem2\SCS\SCS-Project\Project\deps\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Faculta\An 3\Sem2\SCS\SCS-Project\Project\deps\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\Faculta\An 3\Sem2\SCS\Proiect\Project\deps\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Faculta\An 3\Sem2\SCS\Proiect\Project\deps\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Faculta\An 3\Sem2\SCS\SCS-Project\Project\deps\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Faculta\An 3\Sem2\SCS\SCS-Project\Project\deps\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
