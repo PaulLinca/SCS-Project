@@ -92,15 +92,22 @@ void Window::pollEvents()
 }
 
 //renders things on screen
-void Window::clear(int x1, int y1, int x2, int y2) const
+void Window::drawLine(int x1, int y1, int x2, int y2) const
+{
+	//draw line
+	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);	//set color to white
+	SDL_RenderDrawLine(_renderer, x1, y1, x2, y2);			//draws line with given parameters
+}
+
+void Window::drawBackground() const
 {
 	//draw background
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 200, 255);		//set color of the renderer to blue
 	SDL_RenderClear(_renderer);								//gets the color on the renderer
-	SDL_RenderPresent(_renderer);							//actually puts the color on the screen
+}
 
-	//draw line
-	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);	//set color to white
-	SDL_RenderDrawLine(_renderer, x1, y1, x2, y2);			//draws line with given parameters
-	SDL_RenderPresent(_renderer);							//actually puts the line onto the screen
+//render the elements on screen
+void Window::renderPresentCall()
+{
+	SDL_RenderPresent(_renderer);
 }

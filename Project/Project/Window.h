@@ -12,8 +12,12 @@ public:
 
 	//checks if any action was performed
 	void pollEvents();
-	//draws on the window
-	void clear(int x1, int y1, int x2, int y2) const;
+	//draws lines on window
+	void drawLine(int x1, int y1, int x2, int y2) const;
+	//draws background
+	void drawBackground() const;
+	//actually renders the items
+	void renderPresentCall();
 
 	//checks if window is closed
 	inline bool isClosed() const { return _closed; }
