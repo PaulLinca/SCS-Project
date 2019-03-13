@@ -1,4 +1,4 @@
-# SCS-Project
+# SCS-Project - Ongoing
 
 **Requirement**<br />
 The subject of this project is developing a program that controls laser cutting machine.
