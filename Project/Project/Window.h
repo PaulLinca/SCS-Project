@@ -1,6 +1,7 @@
 #pragma once //causes the file to be included only once in a single compilation
 #include <string>
 #include <SDL.h>
+#include "myStruct.h"
 
 class Window
 {
@@ -12,12 +13,17 @@ public:
 
 	//checks if any action was performed
 	void pollEvents();
-	//draws lines on window
-	void drawLine(int x1, int y1, int x2, int y2) const;
 	//draws background
 	void drawBackground() const;
 	//actually renders the items
 	void renderPresentCall();
+
+	//draws lines on window
+	void drawLine(Line line);
+	int getOctant(Line line);
+	//draw circle
+	void drawCircle(int x, int y, int radius);
+
 
 	//checks if window is closed
 	inline bool isClosed() const { return _closed; }

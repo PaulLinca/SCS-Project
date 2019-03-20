@@ -2,16 +2,16 @@
 #include <SDL.h>
 #include "Window.h"
 #include <fstream>
+#include "myStruct.h"
 
 using namespace std;
 
 //input file
 ifstream inputFile("input.txt");
 
-//coordinates of the line
-int xa[100], ya[100], xb[100], yb[100];
-int numberOfLines = 0;
 
+Line lines[100];
+int numberOfLines = 0;
 //this function initializes the SDL 2.0 library and displays a message whether it was successful
 void initializeSDL()
 {
@@ -32,11 +32,18 @@ void readFile()
 	{
 		while (!inputFile.eof())
 		{
-			inputFile >> xa[numberOfLines];
-			inputFile >> ya[numberOfLines];
-			inputFile >> xb[numberOfLines];
-			inputFile >> yb[numberOfLines];
-			numberOfLines++;
+			int type;
+			inputFile >> type;
+
+			if (type == 1)
+			{
+				inputFile >> lines[numberOfLines].startX;
+				inputFile >> lines[numberOfLines].startY;
+				inputFile >> lines[numberOfLines].endX;
+				inputFile >> lines[numberOfLines].endY;
+
+				numberOfLines++;
+			}
 		}
 	}
 
@@ -54,23 +61,23 @@ int main(int argc, char **args)
 	//reads line coordinates from file
 	readFile();
 
+	//draw background
+	window.drawBackground();
+
+	//draw lines
+	for (int i = 0; i < numberOfLines; i++)
+	{
+		window.drawLine(lines[i]);
+	}
+
 	//program loop
 	while (!window.isClosed())			//if the window is open
 	{
-		//draw background
-		window.drawBackground();
-
-		//draw lines
-		for (int i = 0; i <= numberOfLines; i++)
-		{
-			window.drawLine(xa[i], ya[i], xb[i], yb[i]);
-		}
+		//check for events
+		window.pollEvents();
 
 		//renders elements
 		window.renderPresentCall();
-
-		//check for events
-		window.pollEvents();			
 	}
 
 	//cleans up all initialized subsystems
