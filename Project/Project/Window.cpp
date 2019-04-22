@@ -166,7 +166,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(5);
+			Wait(_drawSpeed);
 
 			++tmpCurrentX;
 
@@ -194,7 +194,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(5); 
+			Wait(_drawSpeed); 
 
 			--tmpCurrentY;
 
@@ -222,7 +222,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(5);
+			Wait(_drawSpeed);
 
 			--tmpCurrentY;
 
@@ -250,7 +250,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(5);
+			Wait(_drawSpeed);
 
 			--tmpCurrentX;
 
@@ -278,7 +278,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(5);
+			Wait(_drawSpeed);
 
 			--tmpCurrentX;
 
@@ -306,7 +306,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(5);
+			Wait(_drawSpeed);
 
 			++tmpCurrentY;
 
@@ -335,7 +335,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(5);
+			Wait(_drawSpeed);
 
 			++tmpCurrentY;
 
@@ -363,7 +363,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(5);
+			Wait(_drawSpeed);
 			++tmpCurrentX;
 
 			if (d < 0)
@@ -389,6 +389,142 @@ void Window::drawBackground() const
 	//draw background
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 200, 255);		//set color of the renderer to blue
 	SDL_RenderClear(_renderer);								//gets the color on the renderer
+}
+
+//reverses an array
+void rvereseArray(int arr[], int start, int end)
+{
+	while (start < end)
+	{
+		int temp = arr[start];
+		arr[start] = arr[end];
+		arr[end] = temp;
+		start++;
+		end--;
+	}
+}
+
+//draws a circle
+void Window::drawCircle(Circle circle)
+{
+	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
+
+	int x0 = circle.midX;
+	int y0 = circle.midY;
+	int radius = circle.radius;
+
+	int x = radius;
+	int y = 0;
+	int err = 0;
+
+	int x1[10000], x2[10000], x3[10000], x4[10000], x5[10000], x6[10000], x7[10000], x8[10000];
+	int y1[10000], y2[10000], y3[10000], y4[10000], y5[10000], y6[10000], y7[10000], y8[10000];
+
+	int n = 0;
+	while (x >= y)
+	{
+		x1[n] = x0 + x;
+		y1[n] = y0 + y;
+
+		x2[n] = x0 + y;
+		y2[n] = y0 + x;
+
+		x3[n] = x0 - y;
+		y3[n] = y0 + x;
+
+		x4[n] = x0 - x;
+		y4[n] = y0 + y;
+
+		x5[n] = x0 - x;
+		y5[n] = y0 - y;
+
+		x6[n] = x0 - y;
+		y6[n] = y0 - x;
+
+		x7[n] = x0 + y;
+		y7[n] = y0 - x;
+
+		x8[n] = x0 + x;
+		y8[n] = y0 - y;
+
+		n++;
+
+		if (err <= 0)
+		{
+			y += 1;
+			err += 2 * y + 1;
+		}
+
+		if (err > 0)
+		{
+			x -= 1;
+			err -= 2 * x + 1;
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		SDL_RenderDrawPoint(_renderer, x1[i], y1[i]);
+		SDL_RenderPresent(_renderer);
+		Wait(_drawSpeed);
+	}
+
+	rvereseArray(x2, 0, n - 1);
+	rvereseArray(y2, 0, n - 1);
+	for (int i = 0; i < n; i++)
+	{
+		SDL_RenderDrawPoint(_renderer, x2[i], y2[i]);
+		SDL_RenderPresent(_renderer);
+		Wait(_drawSpeed);
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		SDL_RenderDrawPoint(_renderer, x3[i], y3[i]);
+		SDL_RenderPresent(_renderer);
+		Wait(_drawSpeed);
+	}
+
+	rvereseArray(x4, 0, n - 1);
+	rvereseArray(y4, 0, n - 1);
+	for (int i = 0; i < n; i++)
+	{
+		SDL_RenderDrawPoint(_renderer, x4[i], y4[i]);
+		SDL_RenderPresent(_renderer);
+		Wait(_drawSpeed);
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		SDL_RenderDrawPoint(_renderer, x5[i], y5[i]);
+		SDL_RenderPresent(_renderer);
+		Wait(_drawSpeed);
+	}
+
+	rvereseArray(x6, 0, n - 1);
+	rvereseArray(y6, 0, n - 1);
+	for (int i = 0; i < n; i++)
+	{
+		SDL_RenderDrawPoint(_renderer, x6[i], y6[i]);
+		SDL_RenderPresent(_renderer);
+		Wait(_drawSpeed);
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		SDL_RenderDrawPoint(_renderer, x7[i], y7[i]);
+		SDL_RenderPresent(_renderer);
+		Wait(_drawSpeed);
+	}
+
+	rvereseArray(x8, 0, n - 1);
+	rvereseArray(y8, 0, n - 1);
+	for (int i = 0; i < n; i++)
+	{
+		SDL_RenderDrawPoint(_renderer, x8[i], y8[i]);
+		SDL_RenderPresent(_renderer);
+		Wait(_drawSpeed);
+	}
 }
 
 //render the elements on screen

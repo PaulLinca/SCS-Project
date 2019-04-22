@@ -21,9 +21,8 @@ public:
 	//draws lines on window
 	void drawLine(Line line);
 	int getOctant(Line line);
-	//draw circle
-	void drawCircle(int x, int y, int radius);
-
+	//draws a circle
+	void drawCircle(Circle circle);
 
 	//checks if window is closed
 	inline bool isClosed() const { return _closed; }
@@ -43,4 +42,7 @@ private:
 	//initialize with nullptr
 	SDL_Window *_window = nullptr;
 	SDL_Renderer *_renderer = nullptr;
+
+	//speed at which the points are drawn
+	long _drawSpeed;
 };

@@ -9,9 +9,12 @@ using namespace std;
 //input file
 ifstream inputFile("input.txt");
 
-
 Line lines[100];
 int numberOfLines = 0;
+
+Circle circles[100];
+int numberOfCircles = 0;
+
 //this function initializes the SDL 2.0 library and displays a message whether it was successful
 void initializeSDL()
 {
@@ -44,6 +47,14 @@ void readFile()
 
 				numberOfLines++;
 			}
+			else if (type == 2)
+			{
+				inputFile >> circles[numberOfCircles].midX;
+				inputFile >> circles[numberOfCircles].midY;
+				inputFile >> circles[numberOfCircles].radius;
+
+				numberOfCircles++;
+			}
 		}
 	}
 
@@ -68,6 +79,12 @@ int main(int argc, char **args)
 	for (int i = 0; i < numberOfLines; i++)
 	{
 		window.drawLine(lines[i]);
+	}
+
+	//draw circles
+	for (int i = 0; i < numberOfCircles; i++)
+	{
+		window.drawCircle(circles[i]);
 	}
 
 	//program loop

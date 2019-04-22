@@ -4,7 +4,7 @@
 using namespace std;
 
 //makes program wait 'Time' miliseconds
-bool Wait(const unsigned long &Time)
+bool Wait(long Time)
 {
 	//start time
 	clock_t Tick = clock_t(float(clock()) / float(CLOCKS_PER_SEC) * 1000.f);

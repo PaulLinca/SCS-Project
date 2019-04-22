@@ -10,4 +10,11 @@ typedef struct _Line
 	int endY;
 } Line;
 
+typedef struct _Circle
+{
+	int midX;
+	int midY;
+	int radius;
+}Circle;
+
 #endif
