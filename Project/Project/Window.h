@@ -42,7 +42,4 @@ private:
 	//initialize with nullptr
 	SDL_Window *_window = nullptr;
 	SDL_Renderer *_renderer = nullptr;
-
-	//speed at which the points are drawn
-	long _drawSpeed;
 };

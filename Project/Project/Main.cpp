@@ -67,7 +67,7 @@ int main(int argc, char **args)
 	initializeSDL();
 
 	//create a window
-	Window window("Test", 800, 600);
+	Window window("Drawing Window", 800, 600);
 
 	//reads line coordinates from file
 	readFile();

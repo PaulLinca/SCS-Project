@@ -6,6 +6,7 @@ using namespace std;
 //makes program wait 'Time' miliseconds
 bool Wait(long Time)
 {
+	printf("MUIE");
 	//start time
 	clock_t Tick = clock_t(float(clock()) / float(CLOCKS_PER_SEC) * 1000.f);
 	if (Tick < 0)

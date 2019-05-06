@@ -7,6 +7,9 @@
 
 using namespace std;
 
+Line toDraw;
+Circle toDrawC;
+
 /*
 *	Constructor of the Window class
 *	Parameters: title of the window, width of the window, height of the window
@@ -73,16 +76,16 @@ void Window::pollEvents()
 {
 	SDL_Event event;
 
-	//tetsts if an event actually occured
+	//tests if an event actually occured
 	if (SDL_PollEvent(&event))
 	{
-		//if 'X' button is pressed
+		//'X' button is pressed
 		if (event.type == SDL_QUIT)
 		{
 			_closed = true;
 		}
 
-		//if keyboard button is pressed
+		//keyboard button is pressed
 		if (event.type == SDL_KEYDOWN)
 		{
 			switch (event.key.keysym.sym)
@@ -90,6 +93,49 @@ void Window::pollEvents()
 				case SDLK_ESCAPE:			//'esc' button
 					_closed = true;
 					break;
+			}
+		}
+
+		//mouse button
+		if (event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			if (event.button.button == SDL_BUTTON_LEFT)
+			{
+				toDraw.startX = event.button.x;
+				toDraw.startY = event.button.y;
+			}
+
+			if (event.button.button == SDL_BUTTON_RIGHT)
+			{
+				toDrawC.midX = event.button.x;
+				toDrawC.midY = event.button.y;
+			}
+		}
+
+		if (event.type == SDL_MOUSEBUTTONUP)
+		{
+			if (event.button.button == SDL_BUTTON_LEFT)
+			{
+				toDraw.endX = event.button.x;
+				toDraw.endY = event.button.y;
+				
+				drawLine(toDraw);
+			}
+
+			if (event.button.button == SDL_BUTTON_RIGHT)
+			{
+				int radius = event.button.x - toDrawC.midX;
+				radius *= radius;
+
+				int temp = event.button.y - toDrawC.midY;
+				temp *= temp;
+
+				radius += temp;
+
+				radius = sqrt(radius);
+			
+				toDrawC.radius = radius;
+				drawCircle(toDrawC);
 			}
 		}
 	}
@@ -166,8 +212,8 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(_drawSpeed);
-
+			//Wait(1000);
+			
 			++tmpCurrentX;
 
 			if (d < 0)
@@ -194,7 +240,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(_drawSpeed); 
+			//Wait(1000); 
 
 			--tmpCurrentY;
 
@@ -222,7 +268,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(_drawSpeed);
+			//Wait(1000);
 
 			--tmpCurrentY;
 
@@ -250,7 +296,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(_drawSpeed);
+			//Wait(1000);
 
 			--tmpCurrentX;
 
@@ -278,7 +324,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(_drawSpeed);
+			//Wait(1000);
 
 			--tmpCurrentX;
 
@@ -306,7 +352,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(_drawSpeed);
+			//Wait(1000);
 
 			++tmpCurrentY;
 
@@ -335,7 +381,7 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(_drawSpeed);
+			//Wait(1000);
 
 			++tmpCurrentY;
 
@@ -363,7 +409,8 @@ void Window::drawLine(Line line)
 			//Draw current point
 			SDL_RenderDrawPoint(_renderer, tmpCurrentX, tmpCurrentY);
 			SDL_RenderPresent(_renderer);
-			Wait(_drawSpeed);
+			//Wait(1000);
+
 			++tmpCurrentX;
 
 			if (d < 0)
@@ -466,7 +513,7 @@ void Window::drawCircle(Circle circle)
 	{
 		SDL_RenderDrawPoint(_renderer, x1[i], y1[i]);
 		SDL_RenderPresent(_renderer);
-		Wait(_drawSpeed);
+		//Wait(1000);
 	}
 
 	rvereseArray(x2, 0, n - 1);
@@ -475,14 +522,14 @@ void Window::drawCircle(Circle circle)
 	{
 		SDL_RenderDrawPoint(_renderer, x2[i], y2[i]);
 		SDL_RenderPresent(_renderer);
-		Wait(_drawSpeed);
+		//Wait(1000);
 	}
 
 	for (int i = 0; i < n; i++)
 	{
 		SDL_RenderDrawPoint(_renderer, x3[i], y3[i]);
 		SDL_RenderPresent(_renderer);
-		Wait(_drawSpeed);
+		//Wait(1000);
 	}
 
 	rvereseArray(x4, 0, n - 1);
@@ -491,14 +538,14 @@ void Window::drawCircle(Circle circle)
 	{
 		SDL_RenderDrawPoint(_renderer, x4[i], y4[i]);
 		SDL_RenderPresent(_renderer);
-		Wait(_drawSpeed);
+		//Wait(1000);
 	}
 
 	for (int i = 0; i < n; i++)
 	{
 		SDL_RenderDrawPoint(_renderer, x5[i], y5[i]);
 		SDL_RenderPresent(_renderer);
-		Wait(_drawSpeed);
+		//Wait(1000);
 	}
 
 	rvereseArray(x6, 0, n - 1);
@@ -507,14 +554,14 @@ void Window::drawCircle(Circle circle)
 	{
 		SDL_RenderDrawPoint(_renderer, x6[i], y6[i]);
 		SDL_RenderPresent(_renderer);
-		Wait(_drawSpeed);
+		//Wait(1000);
 	}
 
 	for (int i = 0; i < n; i++)
 	{
 		SDL_RenderDrawPoint(_renderer, x7[i], y7[i]);
 		SDL_RenderPresent(_renderer);
-		Wait(_drawSpeed);
+		//Wait(1000);
 	}
 
 	rvereseArray(x8, 0, n - 1);
@@ -523,7 +570,7 @@ void Window::drawCircle(Circle circle)
 	{
 		SDL_RenderDrawPoint(_renderer, x8[i], y8[i]);
 		SDL_RenderPresent(_renderer);
-		Wait(_drawSpeed);
+		//Wait(1000);
 	}
 }
 
