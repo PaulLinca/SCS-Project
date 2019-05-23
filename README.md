@@ -15,9 +15,9 @@ A window with a blue blackground (reminiscent of blueprints) will be created tha
 
 The program will proceed to drawing the lines and the circles point by point, simulating a laser cutting machine that follows a given trajectory.
 
-<p align="center"> <img src="AssignmentImages/drawnInput.png" /> </p>
+<p align="center"> <img src="Images/drawnInput.png" /> </p>
 
 Lastly, the user can add additional lines or circles using the mouse as a pointer and the mouse buttons to getermine the size of the objects.
 
-<p align="center"> <img src="AssignmentImages/mouseInput.png" /> </p>
+<p align="center"> <img src="Images/mouseInput.png" /> </p>
 
