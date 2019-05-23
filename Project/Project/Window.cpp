@@ -129,7 +129,7 @@ void Window::pollEvents()
 
 				int temp = event.button.y - toDrawC.midY;
 				temp *= temp;
-
+				`
 				radius += temp;
 
 				radius = sqrt(radius);
