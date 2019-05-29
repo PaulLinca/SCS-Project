@@ -1,4 +1,4 @@
-# Draw Cutting Trajectory - Work in Progress
+# Draw Cutting Trajectory
 
 **Requirement**<br />
 The subject of this project is developing a program that controls laser cutting machine.
